@@ -1,0 +1,10 @@
+*.apk
+*.ap_
+*.dex
+*.class
+local.properties
+.gradle/
+build/
+/*/build/
+.DS_Store
+Thumbs.db
