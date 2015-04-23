@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.11.+'
@@ -9,8 +9,13 @@ buildscript {
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 'android-10'
+    compileSdkVersion 21
     buildToolsVersion '21.1.2'
+    
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 21
+    }
 
     buildTypes {
         release {
@@ -18,4 +23,14 @@ android {
             proguardFile getDefaultProguardFile('proguard-android.txt')
         }
     }
+}
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:+"
+    compile "org.jsoup:jsoup:1.8.2+"
 }
