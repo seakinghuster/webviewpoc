@@ -8,3 +8,7 @@ build/
 /*/build/
 .DS_Store
 Thumbs.db
+
+# Android Studio specific files
+.idea/
+*.iml
