@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import java.io.InputStream;
 import java.util.Scanner;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -19,10 +21,7 @@ public class WebviewPoCActivity extends Activity {
     setContentView(R.layout.main);
     
     // Read HTML file from resources
-    Resources resources = getResources();
-    InputStream inputStream = resources.openRawResource(R.raw.test);
-    Scanner scanner = new Scanner(inputStream, "utf-8").useDelimiter("\\A");
-    String html = scanner.hasNext() ? scanner.next() : "";
+    String html = getRawResourceAsString(R.raw.testhtml);
     
     // Clean the HTML
     Whitelist whitelist = Whitelist
@@ -39,13 +38,31 @@ public class WebviewPoCActivity extends Activity {
       "fieldset",
       "title",
       "time",
-      "noscript"
+      "noscript",
+      "head"
     );
     html = Jsoup.clean(html, whitelist);
+    
+    // Inject the styles
+    Document document = Jsoup.parse(html);
+    Element head = document.getElementsByTag("head").first();
+    if (head != null) {
+      Element styleElement = head.appendElement("style");
+      styleElement.attr("type", "text/css");
+      String css = getRawResourceAsString(R.raw.testcss);
+      styleElement.appendText(css);
+    }
     
     // Display in web view
     WebView webView = (WebView) findViewById(R.id.webview);
     webView.setVerticalScrollBarEnabled(true);
     webView.loadData(html, "text/html", "utf-8");
+  }
+  
+  private String getRawResourceAsString(int resourceID) {
+    Resources resources = getResources();
+    InputStream inputStream = resources.openRawResource(resourceID);
+    Scanner scanner = new Scanner(inputStream, "utf-8").useDelimiter("\\A");
+    return scanner.hasNext() ? scanner.next() : "";
   }
 }
