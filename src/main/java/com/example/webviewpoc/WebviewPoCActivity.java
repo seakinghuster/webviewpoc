@@ -19,7 +19,7 @@ public class WebviewPoCActivity extends Activity {
     // Some intro.
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    
+
     // Read HTML file from resources
     String html = getRawResourceAsString(R.raw.testhtml);
     
@@ -55,10 +55,11 @@ public class WebviewPoCActivity extends Activity {
     
     // Display in web view
     WebView webView = (WebView) findViewById(R.id.webview);
+    webView.setWebViewClient(new DxWebViewClient());
     webView.setVerticalScrollBarEnabled(true);
-    webView.loadData(html, "text/html", "utf-8");
+    webView.loadDataWithBaseURL("file:///", document.outerHtml(), "text/html", "utf-8", null);
   }
-  
+
   private String getRawResourceAsString(int resourceID) {
     Resources resources = getResources();
     InputStream inputStream = resources.openRawResource(resourceID);

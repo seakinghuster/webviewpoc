@@ -1,7 +1,11 @@
+@font-face {
+  font-family: "Merriweather";
+  src: url('file:///android_asset/fonts/Merriweather.ttf');
+}
+
+
 body {
-  font-family: Merriweather;
-  font-weight: 400;
-  color: red;
+  font-family: "Merriweather";
 }
 
 h1 {

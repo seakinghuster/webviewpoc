@@ -16,7 +16,7 @@
 - Compile with `./gradlew assembleDebug`.
 - Start the Android emulator using `~/Library/Android/sdk/tools/android avd &`, select the device, and start it
 - Install the APK on the device using `~/Library/Android/sdk/platform-tools/adb install -r build/outputs/apk/webviewpoc-debug.apk`
-- Optionally, ,onitor the device using `~/Library/Android/sdk/tools/monitor &`.
+- Optionally, monitor the device using `~/Library/Android/sdk/tools/monitor &`.
 
 
 ### Debugging from the command line
