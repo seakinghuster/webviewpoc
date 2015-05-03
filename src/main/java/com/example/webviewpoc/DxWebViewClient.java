@@ -16,6 +16,8 @@ public class DxWebViewClient extends WebViewClient {
       URL url = new URL(urlString);
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
       String html = Utilities.inputStreamToString(connection.getInputStream());
+      String css = Utilities.getRawResourceAsString(R.raw.testcss, webView.getContext());
+      html = Core.reformatHtml(html, css);
       connection.disconnect();
       webView.loadDataWithBaseURL("file:///", html, "text/html", "utf-8", null);
     } catch (IOException e) {
